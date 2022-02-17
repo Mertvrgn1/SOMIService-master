@@ -32,9 +32,8 @@ namespace SOMIService.Data
                 .HasPrecision(9, 2);
         }
 
-        public DbSet<Category> Categories { get; set; }
+       
         public DbSet<FailureLogging> FailureLoggings { get; set; }
-        public DbSet<FailureLoggingDetail> FailureLoggingDetails { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
 

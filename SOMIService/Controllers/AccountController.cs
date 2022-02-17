@@ -98,7 +98,7 @@ namespace SOMIService.Controllers
             if (result.Succeeded)
             {
                 //kullanıcıya rol atama
-                var count = _userManager.Users.Count();
+                var count = _userManager.Users.Count();//countun sebbei hiç kullanıcı olup olmamasına bakmak ve sonrasında ona göre admini belirledi
                 result = await _userManager.AddToRoleAsync(user, count == 1 ? RoleModels.Admin : RoleModels.Passive);
                 //email onay maili
 

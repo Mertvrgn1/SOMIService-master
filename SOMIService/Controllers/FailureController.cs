@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SOMIService.Data;
 using SOMIService.Extensions;
 using SOMIService.Models;
+using SOMIService.Models.Identity;
 using SOMIService.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,13 @@ namespace SOMIService.Controllers
     {
         private readonly MyContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FailureController(MyContext context, IMapper mapper)
+        public FailureController(MyContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
             _context = context;
+            _userManager=userManager;
         }
 
         [Authorize]
@@ -52,18 +56,22 @@ namespace SOMIService.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddFailureLogging()
+        public async Task<IActionResult> AddFailureLogging()
         {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            if (user == null) return BadRequest(string.Empty);
+            ViewBag.UserName = user.UserName;
+            ViewBag.Email = user.Email;
             return View();
         }
 
-        [HttpPost]
-        public IActionResult AddFailureLogging(FailureViewModel failureViewModel)
-        {
-
-            //var data
-            return View();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> AddFailureLogging(FailureViewModel failureViewModel)
+        //{
+           
+            
+        //    return View();
+        //}
 
 
     }

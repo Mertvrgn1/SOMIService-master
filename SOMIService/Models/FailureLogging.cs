@@ -9,21 +9,26 @@ using System.Threading.Tasks;
 
 namespace SOMIService.Models
 {
-    public class FailureLogging:BaseEntity
+    public class FailureLogging
 
     {
-        [Display(Name = "Adres")]
-        public string Address { get; set; }
+        [Key]
+        public int FailureLoggingId { get; set; }
         public string UserId { get; set; }
-        public Guid CategoryId { get; set; }
-        [Display(Name = "Açıklama")]
-        public string Description { get; set; }
-        public string Location { get; set; }
-
+        public string TechnicianId { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public string Description{ get; set; }
+        public bool TechnicianIsActive { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? TechnicianAssignDate { get; set; }
+        public DateTime? DeadlineDate { get; set; }
+        public Decimal? TotalPrice { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser User { get; set; }
-        [ForeignKey(nameof(CategoryId))]
-        public virtual Category Category { get; set; }
-        public List<FailureLoggingDetail> FailureLoggingDetail { get; set; } = new List<FailureLoggingDetail>();
+        [ForeignKey(nameof(TechnicianId))]
+        public virtual ApplicationUser Technician { get; set; }
+
+
     }
 }

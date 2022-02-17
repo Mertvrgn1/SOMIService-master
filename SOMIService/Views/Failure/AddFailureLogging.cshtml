@@ -13,16 +13,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="UserName"></label>
-                                <input asp-for="UserName" class="form-control" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                <label>Kullanıcı Adı</label>
+                                <input name="@ViewBag.UserName" value="@ViewBag.UserName" disabled="disabled" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="CategoryName"></label>
-                                <input asp-for="CategoryName" class="form-control" />
-                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                                <label>Email</label>
+                                <input name="@ViewBag.Email" value="@ViewBag.Email" disabled="disabled" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -30,13 +28,6 @@
                                 <label asp-for="Phone"></label>
                                 <input asp-for="Phone" class="form-control" />
                                 <span asp-validation-for="Phone" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Location"></label>
-                                <input asp-for="Location" class="form-control" />
-                                <span asp-validation-for="Location" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
