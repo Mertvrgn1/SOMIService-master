@@ -13,7 +13,10 @@ namespace SOMIService.ViewModels
 
         [Display(Name = "Telefon Numarası")]
         [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Adres")]
+        public string Address { get; set; }
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;

@@ -19,12 +19,14 @@ namespace SOMIService.Controllers
         private readonly MyContext _context;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly MyContext _dbContext;
 
-        public FailureController(MyContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
+        public FailureController(MyContext context, IMapper mapper, UserManager<ApplicationUser> userManager,MyContext dbContext)
         {
             _mapper = mapper;
             _context = context;
             _userManager=userManager;
+            _dbContext = dbContext;
         }
 
         [Authorize]
@@ -55,6 +57,7 @@ namespace SOMIService.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> AddFailureLogging()
         {
@@ -65,13 +68,27 @@ namespace SOMIService.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddFailureLogging(FailureViewModel failureViewModel)
-        //{
-           
-            
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> AddFailureLogging(FailureViewModel model)
+        {
+            //var data = _mapper.Map<FailureLogging>(model);
+            var data = new FailureLogging()
+            {
+                
+                UserId = HttpContext.GetUserId(),
+                PhoneNumber = model.PhoneNumber,
+                Address = model.Address,
+                Description = model.Description,
+                CreatedDate = model.CreatedDate
+
+
+            };
+
+            _dbContext.FailureLoggings.Add(data);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index","Home");
+        }
 
 
     }

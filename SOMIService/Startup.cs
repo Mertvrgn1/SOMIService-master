@@ -76,7 +76,7 @@ namespace SOMIService
 
             services.AddAutoMapper(options =>
             {
-                //options.AddProfile<PaymentProfile>();
+                options.AddProfile(typeof(FailureProfile));
                 options.AddProfile(typeof(PaymentProfile));
                 options.AddProfile<EntityProfile>();
 
