@@ -30,10 +30,9 @@ namespace SOMIService.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult GetFailureLogging()
-        {
-            var UserId = HttpContext.GetUserId();      
-           
+        {      
                 var data = _context.FailureLoggings
               .OrderByDescending(x => x.CreatedDate)
               .ToList()
@@ -53,8 +52,23 @@ namespace SOMIService.Controllers
             //    return RedirectToAction("Error", "Home");
             //}
 
+        }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetFailureLoggingByUserId()
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
 
+            var userFailureLogging = _context.FailureLoggings
+          .OrderByDescending(x => x.CreatedDate)
+          .Where(x=> x.UserId==user.Id)
+          .ToList()
+          .Select(x => _mapper.Map<FailureViewModel>(x))
+          .ToList();
+
+            return View(userFailureLogging);
+           
         }
 
         [Authorize]
