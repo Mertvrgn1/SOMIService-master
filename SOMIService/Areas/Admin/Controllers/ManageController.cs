@@ -40,6 +40,7 @@ namespace SOMIService.Areas.Admin.Controllers
             {
                 Id = user.Id,
                 Name = user.Name,
+                Surname=user.Surname,
                 UserName = user.UserName,
                 CreatedDate = user.CreatedDate,
                 Email = user.Email,
@@ -70,6 +71,7 @@ namespace SOMIService.Areas.Admin.Controllers
             var model = new UserDetailViewModel()
             {
                 Name = user.Name,
+                Surname=user.Surname,
                 Email = user.Email,
                 UserName = user.UserName,
                 UserRoles=userRoles
@@ -95,6 +97,7 @@ namespace SOMIService.Areas.Admin.Controllers
 
             //Kullanıcı Update işlemleri
             user.Name = model.Name;
+            user.Surname = model.Surname;
             user.UserName = model.UserName;
 
             var result =await _userManager.UpdateAsync(user);
