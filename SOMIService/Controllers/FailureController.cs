@@ -59,7 +59,8 @@ namespace SOMIService.Controllers
         public async Task<IActionResult> GetFailureLoggingByUserId()
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-
+            ViewBag.UserName = user.UserName;
+            ViewBag.Email = user.Email;
             var userFailureLogging = _context.FailureLoggings
           .OrderByDescending(x => x.CreatedDate)
           .Where(x=> x.UserId==user.Id)

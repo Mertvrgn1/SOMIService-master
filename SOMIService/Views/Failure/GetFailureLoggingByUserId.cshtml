@@ -3,6 +3,8 @@
 
 <table class="table table-bordered" id="personel">
     <tr>
+        <th>UserName</th>
+        <th>Email</th>
         <th>PhoneNumber</th>
         <th>Adres</th>
         <th>Description</th>
@@ -12,8 +14,9 @@
     @foreach (var item in Model)
     {
         <tr>
-
-            <td>@item.PhoneNumber<S/td>
+            <td>@ViewBag.UserName</td>
+            <td>@ViewBag.Email</td>
+            <td>@item.PhoneNumber</td>
             <td>@item.Address</td>
             <td>@item.Description</td>
             <td>@item.CreatedDate</td>
