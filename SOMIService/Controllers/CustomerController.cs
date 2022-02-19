@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace SOMIService.Controllers
 {
-    public class FailureController : Controller
+    public class CustomerController : Controller
     {
         private readonly MyContext _context;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly MyContext _dbContext;
 
-        public FailureController(MyContext context, IMapper mapper, UserManager<ApplicationUser> userManager,MyContext dbContext)
+        public CustomerController(MyContext context, IMapper mapper, UserManager<ApplicationUser> userManager,MyContext dbContext)
         {
             _mapper = mapper;
             _context = context;
