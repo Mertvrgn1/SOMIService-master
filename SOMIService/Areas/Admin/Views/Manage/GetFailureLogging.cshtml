@@ -29,11 +29,10 @@
         $(() => {
             var url = '../../../Manage/GetFailureLoggingData';
             const dataGrid = $('#dxGrid').dxDataGrid({
-                dataGrid = $("#dxGrid").dxDataGrid({
                     remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
                     dataSource: DevExpress.data.AspNet.createStore({
-                        key: 'id',
-                        loadUrl: `${url}/get`,
+                        key: 'failureLoggingId',
+                        loadUrl: `${url}`,
                         onBeforeSend(method, ajaxOptions) {
                             ajaxOptions.xhrFields = { withCredentials: true };
                             console.log(method);
@@ -65,11 +64,6 @@
                     groupPanel: {
                         visible: true,
                     },
-                    export: {
-                        enabled: true,
-                        fileName: `Tüm Üyelikler_${parseInt(Math.random() * 1000000000)}`,
-                        allowExportSelectedData: true
-                    },
                     pager: {
                         showPageSizeSelector: true,
                         allowedPageSizes: [5, 15, 30, 45],
@@ -91,6 +85,14 @@
                             dataField: "name"
                         },
                         {
+                            caption: 'Soyad',
+                            dataField: "surname"
+                        },
+                        {
+                            caption: 'Email',
+                            dataField: "email"
+                        },
+                        {
                             caption: 'Açıklama',
                             dataField: "description"
                         },           
@@ -102,7 +104,7 @@
                             sortOrder: "desc"
                         }
                     ]
-                }).dxDataGrid("instance");
+                }).dxDataGrid("instance")
             });
 
           
