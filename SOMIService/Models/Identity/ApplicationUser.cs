@@ -9,6 +9,7 @@ namespace SOMIService.Models.Identity
 {
     public class ApplicationUser:IdentityUser
     {
+       
         [Required, StringLength(50)]
         [PersonalData]
         public string Name { get; set; }
@@ -16,5 +17,6 @@ namespace SOMIService.Models.Identity
         [PersonalData]
         public string Surname { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+       
     }
 }

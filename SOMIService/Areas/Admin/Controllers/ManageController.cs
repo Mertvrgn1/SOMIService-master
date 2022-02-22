@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using DevExtreme.AspNet.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using SOMIService.Data;
 using SOMIService.Extensions;
 using SOMIService.Models.Identity;
 using SOMIService.ViewModels;
@@ -12,15 +16,19 @@ using System.Threading.Tasks;
 
 namespace SOMIService.Areas.Admin.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public ManageController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        private readonly MyContext _dbcontext;
+        private readonly IMapper _mapper;
+        public ManageController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, MyContext dbcontext, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _dbcontext = dbcontext;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -40,7 +48,7 @@ namespace SOMIService.Areas.Admin.Controllers
             {
                 Id = user.Id,
                 Name = user.Name,
-                Surname=user.Surname,
+                Surname = user.Surname,
                 UserName = user.UserName,
                 CreatedDate = user.CreatedDate,
                 Email = user.Email,
@@ -65,16 +73,16 @@ namespace SOMIService.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string? id)
         {
-            var user =await _userManager.FindByIdAsync(id);
-            var userRoles =await _userManager.GetRolesAsync(user);
+            var user = await _userManager.FindByIdAsync(id);
+            var userRoles = await _userManager.GetRolesAsync(user);
 
             var model = new UserDetailViewModel()
             {
                 Name = user.Name,
-                Surname=user.Surname,
+                Surname = user.Surname,
                 Email = user.Email,
                 UserName = user.UserName,
-                UserRoles=userRoles
+                UserRoles = userRoles
             };
 
             var roleList = GetRoleList();
@@ -100,7 +108,7 @@ namespace SOMIService.Areas.Admin.Controllers
             user.Surname = model.Surname;
             user.UserName = model.UserName;
 
-            var result =await _userManager.UpdateAsync(user);
+            var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, ModelState.ToFullErrorString());
@@ -110,10 +118,10 @@ namespace SOMIService.Areas.Admin.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
             foreach (var role in userRoles)
             {
-                var roleRemove = await _userManager.RemoveFromRoleAsync(user,role);
+                var roleRemove = await _userManager.RemoveFromRoleAsync(user, role);
             }
             var SelectedRole = await _roleManager.FindByIdAsync(model.SelectedRoleId);
-            var roleAdd = await _userManager.AddToRoleAsync(user,SelectedRole.Name);
+            var roleAdd = await _userManager.AddToRoleAsync(user, SelectedRole.Name);
 
             if (!roleAdd.Succeeded)
             {
@@ -155,6 +163,37 @@ namespace SOMIService.Areas.Admin.Controllers
         public IActionResult SubscriptionTypes()
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult GetFailureLogging()
+        {
+
+            var data = _dbcontext.FailureLoggings
+                .Include(x => x.ApplicationUser)
+                .OrderByDescending(x => x.CreatedDate)
+                .ToList();
+
+            return View(data);
+            //catch (Exception)
+            //{
+            //    TempData["Model"] = new ErrorViewModel()
+            //    {
+            //        Text = $"Bir hata oluştu {ex.Message}",
+            //        ActionName = "Index",
+            //        ControllerName = "Home",
+            //        ErrorCode = 500
+            //    };
+            //    return RedirectToAction("Error", "Home");
+            //}
+
+        }
+        [HttpGet]
+        public IActionResult GetFailureLoggingData(DataSourceLoadOptions loadOptions)
+        {
+            var data = _dbcontext.FailureLoggings;
+            return Ok(DataSourceLoader.Load(data, loadOptions));
         }
     }
 }

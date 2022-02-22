@@ -29,30 +29,6 @@ namespace SOMIService.Controllers
             _dbContext = dbContext;
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetFailureLogging()
-        {      
-                var data = _context.FailureLoggings
-              .OrderByDescending(x => x.CreatedDate)
-              .ToList()
-              .Select(x => _mapper.Map<FailureViewModel>(x))
-              .ToList();
-
-                return View(data);          
-            //catch (Exception)
-            //{
-            //    TempData["Model"] = new ErrorViewModel()
-            //    {
-            //        Text = $"Bir hata oluştu {ex.Message}",
-            //        ActionName = "Index",
-            //        ControllerName = "Home",
-            //        ErrorCode = 500
-            //    };
-            //    return RedirectToAction("Error", "Home");
-            //}
-
-        }
 
         [Authorize]
         [HttpGet]

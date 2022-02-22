@@ -23,11 +23,11 @@ namespace SOMIService.Models
         public DateTime CreatedDate { get; set; }
         public DateTime? TechnicianAssignDate { get; set; }
         public DateTime? DeadlineDate { get; set; }
-        public Decimal? TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
         [ForeignKey(nameof(UserId))]
-        public virtual ApplicationUser User { get; set; }
-        [ForeignKey(nameof(TechnicianId))]
-        public virtual ApplicationUser Technician { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        //[ForeignKey(nameof(TechnicianId))]
+        //public virtual ApplicationUser Technician { get; set; }
 
 
     }
