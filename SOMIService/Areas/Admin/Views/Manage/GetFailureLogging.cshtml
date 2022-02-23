@@ -27,12 +27,12 @@
     <script>
         var dataGrid = null;
         $(() => {
-            var url = '../../../Manage/GetFailureLoggingData';
+            var url = '../../../api/FailureApi';
             const dataGrid = $('#dxGrid').dxDataGrid({
                     remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
                     dataSource: DevExpress.data.AspNet.createStore({
                         key: 'failureLoggingId',
-                        loadUrl: `${url}`,
+                        loadUrl: `${url}/get`,
                         onBeforeSend(method, ajaxOptions) {
                             ajaxOptions.xhrFields = { withCredentials: true };
                             console.log(method);
@@ -74,16 +74,33 @@
                     },
                     columns: [
                         {
-                            caption: 'Id',
-                            dataField: "id",
+                            caption: 'Müşteri',
+                            dataField: "userId",
                             visible: false,
                             allowFiltering: false,
                             formItem: { visible: false }
                         },
                         {
-                            caption: 'Kullanıcı Adı',
-                            dataField: "applicationUser"
-                        },                             
+                            caption: 'Müşteri Adı',
+                            dataField: "applicationUser.name"
+                        },
+                        {
+                            caption: 'Müşteri Soyadı',
+                            dataField: "applicationUser.surname"
+                        },
+                        {
+                            caption: 'Müşteri Kullanıcı Adı',
+                            dataField: "applicationUser.userName"
+                        },
+                        {
+                            caption: 'Adres',
+                            dataField: "address"
+                        },
+                        {
+                            caption: 'Telefon Numarası',
+                            dataField: "phoneNumber"
+                            
+                        },
                         {
                             caption: 'Açıklama',
                             dataField: "description"
