@@ -1,4 +1,4 @@
-﻿@model List<FailureViewModel>
+﻿@model List<CustomerFailureViewModel>
 <h3>Failure Record</h3>
 
 <table class="table table-bordered" id="personel">
@@ -9,6 +9,7 @@
         <th>Adres</th>
         <th>Description</th>
         <th>Created Date</th>
+        <th>Fault Situation</th>
 
     </tr>
     @foreach (var item in Model)
@@ -20,7 +21,7 @@
             <td>@item.Address</td>
             <td>@item.Description</td>
             <td>@item.CreatedDate</td>
-
+            <td>@item.FaultIsFixxed</td>
         </tr>
     }
 

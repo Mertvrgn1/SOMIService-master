@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOMIService.ViewModels
 {
-    public class FailureViewModel
+    public class CustomerFailureViewModel
     {
         public string UserId { get; set; }
         public int FailureLoggingId { get; set; }
@@ -20,5 +20,6 @@ namespace SOMIService.ViewModels
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public bool FaultIsFixxed { get; set; } = false;
     }
 }

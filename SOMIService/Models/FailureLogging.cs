@@ -15,6 +15,7 @@ namespace SOMIService.Models
         [Key]
         public int FailureLoggingId { get; set; }
         public string UserId { get; set; }
+        public string OperatorId { get; set; }
         public string TechnicianId { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
@@ -22,6 +23,8 @@ namespace SOMIService.Models
         public bool TechnicianIsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? TechnicianAssignDate { get; set; }
+        [Display(Name = "Arıza Giderildi Mi")]
+        public bool FaultIsFixxed { get; set; }
         public DateTime? DeadlineDate { get; set; }
         public decimal? TotalPrice { get; set; }
         [ForeignKey(nameof(UserId))]

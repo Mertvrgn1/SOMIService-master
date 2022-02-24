@@ -38,11 +38,11 @@ namespace SOMIService.Controllers
             ViewBag.UserName = user.UserName;
             ViewBag.Email = user.Email;
             var userFailureLogging = _context.FailureLoggings
-          .OrderByDescending(x => x.CreatedDate)
-          .Where(x=> x.UserId==user.Id)
-          .ToList()
-          .Select(x => _mapper.Map<FailureViewModel>(x))
-          .ToList();
+            .OrderByDescending(x => x.CreatedDate)
+            .Where(x => x.UserId == user.Id)
+            .ToList()
+            .Select(x => _mapper.Map<CustomerFailureViewModel>(x))
+            .ToList();
 
             return View(userFailureLogging);
            
@@ -60,17 +60,18 @@ namespace SOMIService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFailureLogging(FailureViewModel model)
+        public async Task<IActionResult> AddFailureLogging(CustomerFailureViewModel model)
         {
             //var data = _mapper.Map<FailureLogging>(model);
             var data = new FailureLogging()
             {
-                
+
                 UserId = HttpContext.GetUserId(),
                 PhoneNumber = model.PhoneNumber,
                 Address = model.Address,
                 Description = model.Description,
-                CreatedDate = model.CreatedDate
+                CreatedDate = model.CreatedDate,
+                FaultIsFixxed=model.FaultIsFixxed
 
 
             };

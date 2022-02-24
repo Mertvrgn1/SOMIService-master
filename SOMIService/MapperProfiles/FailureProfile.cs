@@ -9,7 +9,7 @@ namespace SOMIService.MapperProfiles
     {
         public FailureProfile()
         {
-            CreateMap<FailureLogging, FailureViewModel>().ReverseMap();
+            CreateMap<FailureLogging, CustomerFailureViewModel>().ReverseMap();
         }
     }
 }

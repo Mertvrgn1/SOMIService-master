@@ -166,28 +166,28 @@ namespace SOMIService.Areas.Admin.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult GetFailureLogging()
-        //{
+        [HttpGet]
+        public IActionResult GetFailureLogging()
+        {
 
-        //    var data = _dbcontext.FailureLoggings
-        //        .Include(x => x.ApplicationUser)
-        //        .OrderByDescending(x => x.CreatedDate)
-        //        .ToList();
+            //var data = _dbcontext.FailureLoggings
+            //    .Include(x => x.ApplicationUser)
+            //    .OrderByDescending(x => x.CreatedDate)
+            //    .ToList();
 
-        //    return View();
-        //    //catch (Exception)
-        //    //{
-        //    //    TempData["Model"] = new ErrorViewModel()
-        //    //    {
-        //    //        Text = $"Bir hata oluştu {ex.Message}",
-        //    //        ActionName = "Index",
-        //    //        ControllerName = "Home",
-        //    //        ErrorCode = 500
-        //    //    };
-        //    //    return RedirectToAction("Error", "Home");
-        //    //}
-        //}
+            return View();
+            //catch (Exception)
+            //{
+            //    TempData["Model"] = new ErrorViewModel()
+            //    {
+            //        Text = $"Bir hata oluştu {ex.Message}",
+            //        ActionName = "Index",
+            //        ControllerName = "Home",
+            //        ErrorCode = 500
+            //    };
+            //    return RedirectToAction("Error", "Home");
+            //}
+        }
 
         ////[HttpGet]
         ////public IActionResult GetFailureLoggingData(DataSourceLoadOptions loadOptions)
