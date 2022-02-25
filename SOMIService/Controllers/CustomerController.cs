@@ -34,6 +34,7 @@ namespace SOMIService.Controllers
         [HttpGet]
         public async Task<IActionResult> GetFailureLoggingByUserId()
         {
+
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
             ViewBag.UserName = user.UserName;
             ViewBag.Email = user.Email;

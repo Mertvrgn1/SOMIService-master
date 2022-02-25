@@ -1,7 +1,9 @@
 ﻿using SOMIService.Models.Base;
+using SOMIService.Models.Enums;
 using SOMIService.Models.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -23,6 +25,10 @@ namespace SOMIService.Models
         public bool TechnicianIsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? TechnicianAssignDate { get; set; }
+        [DisplayName("İşlem Durumu")]
+        public OperationStatuses OperationStatus { get; set; } = OperationStatuses.Pending;
+        [DisplayName("İşlem Zamanı")]
+        public DateTime? OperationTime { get; set; }
         [Display(Name = "Arıza Giderildi Mi")]
         public bool FaultIsFixxed { get; set; }
         public DateTime? DeadlineDate { get; set; }

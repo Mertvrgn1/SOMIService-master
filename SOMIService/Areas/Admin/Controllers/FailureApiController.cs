@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace SOMIService.Areas.Admin.Controllers
 {
     [Route("api/[controller]/[action]")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin,Operator")]
     public class FailureApiController : Controller
     {
         private readonly MyContext _dbContext;
