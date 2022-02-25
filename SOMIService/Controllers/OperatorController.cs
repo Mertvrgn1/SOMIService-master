@@ -36,7 +36,7 @@ namespace SOMIService.Controllers
         [HttpGet]
         public async Task<ActionResult> FailureAccept(int id)
         {
-            var opearatorId = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var opearator = await _userManager.FindByIdAsync(HttpContext.GetUserId());
 
             var failureRecord = _dbContext.FailureLoggings
                .FirstOrDefault(x => x.FailureLoggingId == id);
@@ -46,7 +46,7 @@ namespace SOMIService.Controllers
             }
             else
             {
-                failureRecord.OperatorId = opearatorId.ToString();
+                failureRecord.OperatorId = opearator.Id;
                 failureRecord.OperationTime = DateTime.Now;
                 failureRecord.OperationStatus = OperationStatuses.Pending;
                 _dbContext.FailureLoggings.Update(failureRecord);
