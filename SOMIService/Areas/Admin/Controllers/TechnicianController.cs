@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SOMIService.Controllers
+namespace SOMIService.Areas.Admin.Controllers
 {
     public class TechnicianController : Controller
     {
@@ -31,7 +31,7 @@ namespace SOMIService.Controllers
             var FailureLoggingbyTechnicianId = _dbContext.FailureLoggings
                 .Where(x => x.TechnicianId == technician.Id)
                 .ToList();
-           
+
             return View(FailureLoggingbyTechnicianId);
         }
     }

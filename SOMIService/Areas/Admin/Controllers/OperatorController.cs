@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SOMIService.Data;
 using SOMIService.Extensions;
-using SOMIService.Models;
 using SOMIService.Models.Enums;
 using SOMIService.Models.Identity;
 using System;
@@ -11,9 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SOMIService.Controllers
+namespace SOMIService.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin,Operator")]   
     public class OperatorController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -66,3 +63,4 @@ namespace SOMIService.Controllers
         }
     }
 }
+

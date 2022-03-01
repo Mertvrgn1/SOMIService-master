@@ -89,26 +89,30 @@
                             dataField: "applicationUser.surname"
                         },
                         {
-                            caption: 'Müşteri Kullanıcı Adı',
-                            dataField: "applicationUser.userName"
+                            caption: 'Teknisyenin Adı',
+                            dataField: "TechnicianId"
+                            //lookup: {
+                            //    dataSource: {
+                            //        store: DevExpress.data.AspNet.createStore({
+                            //            key: "Id",
+                            //            loadUrl: "../../../api/operatorapi/GetTeknisyenLookup"
+                            //        }),
+                            //        pageSize: 10
+                            //    },
+                            //    displayExpr: "userName",
+                            //    valueExpr: "id"
+                            //}
                         },
                         {
-                            caption: 'Adres',
-                            dataField: "address"
+                            caption: 'Teknisyenin Soyadı',
+                            dataField: ""
                         },
                         {
-                            caption: 'Telefon Numarası',
-                            dataField: "phoneNumber"
+                            caption: 'Arızanın Statüsü',
+                            dataField: "operationStatus"
+                        },
 
-                        },
-                        {
-                            caption: 'Açıklama',
-                            dataField: "description"
-                        },
-                        {
-                            caption: 'Arıza Durumu',
-                            dataField: "faultIsFixxed"
-                        },
+
                         {
                             dataField: "createdDate",
                             caption: "Kayıt Tarihi",
@@ -216,4 +220,5 @@
                 color: white;
             }
     </style>*@
+
 
